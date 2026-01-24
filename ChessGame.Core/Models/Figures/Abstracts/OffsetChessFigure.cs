@@ -8,9 +8,9 @@ public abstract class OffsetChessFigure : ChessFigure
     {
     }
     
-    public override IEnumerable<ChessBoardCell> GetPossibleMoves(Coordinate fromCoord, ChessBoard chessBoard)
+    public override IEnumerable<Coordinate> GetPossibleMoves(Coordinate fromCoord, ChessBoard chessBoard)
     {
-        List<ChessBoardCell> moves = new List<ChessBoardCell>();
+        List<Coordinate> moves = new List<Coordinate>();
 
         foreach (var offset in Offset)
         {
@@ -23,12 +23,12 @@ public abstract class OffsetChessFigure : ChessFigure
             if(cell.Figure is not null && cell.Color != Color)
             {
                 if(cell.Color != Color)
-                    moves.Add(cell);
+                    moves.Add(cell.Coordinate);
                 
                 continue;
             }
             
-            moves.Add(cell);
+            moves.Add(cell.Coordinate);
         }
 
         return moves;

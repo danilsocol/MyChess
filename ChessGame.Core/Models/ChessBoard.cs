@@ -48,6 +48,8 @@ public class ChessBoard
         return cell.Figure is null;
     }
     
+    public bool IsInBound(Coordinate coordinate) => IsInBound(coordinate.Line, coordinate.Column);
+    
     public bool IsInBound(int line,int column)
     {
         if (ChessBoardCell.MaxColumn < column || column < ChessBoardCell.MinColumn)

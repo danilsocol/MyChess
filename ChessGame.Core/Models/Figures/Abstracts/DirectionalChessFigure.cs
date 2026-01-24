@@ -8,9 +8,9 @@ public abstract class DirectionalChessFigure : ChessFigure
     {
     }
     
-    public override IEnumerable<ChessBoardCell> GetPossibleMoves(Coordinate fromCoord, ChessBoard chessBoard)
+    public override IEnumerable<Coordinate> GetPossibleMoves(Coordinate fromCoord, ChessBoard chessBoard)
     {
-        List<ChessBoardCell> moves = new List<ChessBoardCell>();
+        List<Coordinate> moves = new List<Coordinate>();
 
         foreach (var direction in Direction)
         {
@@ -25,12 +25,12 @@ public abstract class DirectionalChessFigure : ChessFigure
                 if(cell.Figure is not null)
                 {
                     if(cell.Figure.Color != Color)
-                        moves.Add(cell);
+                        moves.Add(cell.Coordinate);
                     
                     break;
                 }
                 
-                moves.Add(cell);
+                moves.Add(cell.Coordinate);
             }
         }
 

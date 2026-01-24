@@ -9,5 +9,5 @@ public abstract class ChessFigure
         Color = color;
     }
 
-    public abstract IEnumerable<ChessBoardCell> GetPossibleMoves(Coordinate fromCoord, ChessBoard chessBoard);
+    public abstract IEnumerable<Coordinate> GetPossibleMoves(Coordinate fromCoord, ChessBoard chessBoard);
 }
