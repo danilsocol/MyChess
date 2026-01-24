@@ -2,7 +2,7 @@
 
 namespace ChessGame.Core.Models.Figures;
 
-public class Knight : OffsetFigure
+public class Knight : OffsetChessFigure
 {
     protected override (int directionColumn, int directionLine)[] Offset { get; } =
     {
@@ -10,7 +10,7 @@ public class Knight : OffsetFigure
         (3, -1), (-3, 1), (-1, -3), (1, 3)
     };
     
-    public Knight(Color color, Position position) : base(color, position)
+    public Knight(Color color) : base(color)
     {
     }
 }

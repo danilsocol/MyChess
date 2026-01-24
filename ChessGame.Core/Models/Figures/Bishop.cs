@@ -2,13 +2,13 @@
 
 namespace ChessGame.Core.Models.Figures;
 
-public class Bishop : DirectionalFigure
+public class Bishop : DirectionalChessFigure
 {
     protected override (int directionColumn, int directionLine)[] Direction { get; } =  
     {
         (1, 1), (-1, -1), (1, -1), (-1, 1)
     };
     
-    public Bishop(Color color, Position position) : base(color, position)
+    public Bishop(Color color) : base(color)
     { }
 }

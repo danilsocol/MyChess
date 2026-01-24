@@ -3,15 +3,11 @@ using ChessGame.Core.Models.Figures.Abstracts;
 
 namespace ChessGame.Core.Models;
 
-public class Board
+public class ChessBoard
 {
-    private const int MaxColumn = 7;  
-    private const int MinColumn = 0;  
-    private const int MaxLine = 7;  
-    private const int MinLine = 0;
-    public Cell[,] GameField { get; init; } = new Cell[MaxLine + 1, MaxColumn + 1];
+    public ChessBoardCell[,] GameField { get; init; } = new ChessBoardCell[ChessBoardCell.MaxLine + 1, ChessBoardCell.MaxColumn + 1];
 
-    public Board()
+    public ChessBoard()
     {
         var rowsCount = GameField.GetUpperBound(0) + 1;
         var columnCount = GameField.Length / rowsCount;
@@ -22,31 +18,31 @@ public class Board
         {
             for (int j = 0; j < columnCount; j++)
             {
-                GameField[i, j] = new Cell(new Position(i,j), color);
+                GameField[i, j] = new ChessBoardCell(new Coordinate(i,j), color);
                 color = ChangeColor(color);
             }
         }
     }
     
-    public Cell GetCell(Position position)
+    public ChessBoardCell GetCell(Coordinate position)
     {
         var cell = GameField[position.Line, position.Column];
         return cell;
     }
     
-    public Cell GetCell(int line,int column)
+    public ChessBoardCell GetCell(int line,int column)
     {
         var cell = GameField[line, column];
         return cell;
     }
     
-    public Figure? GetCellFigure(Position position)
+    public ChessFigure? GetCellFigure(Coordinate position)
     {
         var cell = GameField[position.Line, position.Column];
         return cell.Figure;
     }
     
-    public bool IsEmptyCell(Position position)
+    public bool IsEmptyCell(Coordinate position)
     {
         var cell = GameField[position.Line, position.Column];
         return cell.Figure is null;
@@ -54,21 +50,10 @@ public class Board
     
     public bool IsInBound(int line,int column)
     {
-        if (MaxColumn < column || column < MinColumn)
+        if (ChessBoardCell.MaxColumn < column || column < ChessBoardCell.MinColumn)
             return false;
 
-        if (MaxLine < line || line < MinLine)
-            return false;
-
-        return true;
-    }
-    
-    public bool IsInBound(Position position)
-    {
-        if (MaxColumn < position.Column || position.Column < MinColumn)
-            return false;
-
-        if (MaxLine < position.Line || position.Line < MinLine)
+        if (ChessBoardCell.MaxLine < line || line < ChessBoardCell.MinLine)
             return false;
 
         return true;

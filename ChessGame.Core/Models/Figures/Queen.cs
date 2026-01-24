@@ -2,7 +2,7 @@
 
 namespace ChessGame.Core.Models.Figures;
 
-public class Queen : DirectionalFigure
+public class Queen : DirectionalChessFigure
 {
     protected override (int directionColumn, int directionLine)[] Direction { get; } =  
     {
@@ -10,6 +10,6 @@ public class Queen : DirectionalFigure
         (0, 1), (0,-1), (1,0), (-1,0)
     };
     
-    public Queen(Color color, Position position) : base(color, position)
+    public Queen(Color color, Coordinate position) : base(color)
     { }
 }

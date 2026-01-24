@@ -2,41 +2,41 @@
 
 namespace ChessGame.Core.Models.Figures;
 
-public class Pawn : Figure
+public class Pawn : ChessFigure
 {
     public bool IsFirstMove { get; set; } = true;
     
-    public Pawn(Color color, Position position) : base(color, position)
+    public Pawn(Color color, Coordinate position) : base(color)
     {
     }
 
-    public override IEnumerable<Position> GetPossibleMoves(Board board)
+    public override IEnumerable<ChessBoardCell> GetPossibleMoves(Coordinate fromCoord, ChessBoard chessBoard)
     {
-        List<Position> moves = new List<Position>();
+        List<ChessBoardCell> moves = new List<ChessBoardCell>();
         var direction = Color == Color.White ? 1 : -1;
 
-        if(!board.IsInBound(Position.Line + direction,Position.Column)) return moves;
+        if(!chessBoard.IsInBound(fromCoord.Line + direction,fromCoord.Column)) return moves;
         
-        var oneStepCell = board.GetCell(Position.Line + direction,Position.Column);
+        var oneStepCell = chessBoard.GetCell(fromCoord.Line + direction,fromCoord.Column);
         if (oneStepCell.IsEmpty())
         {
-            moves.Add(oneStepCell.Position);
+            moves.Add(oneStepCell);
 
-            if (IsFirstMove && board.IsInBound(oneStepCell.Position.Line + direction, oneStepCell.Position.Column))
+            if (IsFirstMove && chessBoard.IsInBound(oneStepCell.Coordinate.Line + direction, oneStepCell.Coordinate.Column))
             {
-                var twoStepCell = board.GetCell(oneStepCell.Position.Line + direction, oneStepCell.Position.Column);
-                if(twoStepCell.IsEmpty()) moves.Add(twoStepCell.Position);
+                var twoStepCell = chessBoard.GetCell(oneStepCell.Coordinate.Line + direction, oneStepCell.Coordinate.Column);
+                if(twoStepCell.IsEmpty()) moves.Add(twoStepCell);
             }
         }
 
         foreach (var offset in new int[] {1,-1})
         {
-            if(!board.IsInBound(Position.Line + direction, Position.Column + offset)) continue;
+            if(!chessBoard.IsInBound(fromCoord.Line + direction, fromCoord.Column + offset)) continue;
             
-            var diagCell = board.GetCell(Position.Line + direction, Position.Column + offset);
+            var diagCell = chessBoard.GetCell(fromCoord.Line + direction, fromCoord.Column + offset);
             if (diagCell.Figure != null && diagCell.Figure.Color != Color)
             {
-                moves.Add(diagCell.Position); 
+                moves.Add(diagCell); 
             } 
         }
 

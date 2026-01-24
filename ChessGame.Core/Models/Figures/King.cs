@@ -2,7 +2,7 @@
 
 namespace ChessGame.Core.Models.Figures;
 
-public class King : OffsetFigure
+public class King : OffsetChessFigure
 {
     protected override (int directionColumn, int directionLine)[] Offset { get; } =
     {
@@ -10,6 +10,6 @@ public class King : OffsetFigure
         (0, 1), (0, -1), (1, 0), (-1, 0)
     };
     
-    public King(Color color, Position position) : base(color, position)
+    public King(Color color) : base(color)
     { }
 }
