@@ -42,12 +42,6 @@ public class ChessBoard
         return cell.Figure;
     }
     
-    public bool IsEmptyCell(Coordinate position)
-    {
-        var cell = GameField[position.Line, position.Column];
-        return cell.Figure is null;
-    }
-    
     public bool IsInBound(Coordinate coordinate) => IsInBound(coordinate.Line, coordinate.Column);
     
     public bool IsInBound(int line,int column)
@@ -59,6 +53,16 @@ public class ChessBoard
             return false;
 
         return true;
+    }
+
+    public void SetFigureAt(Coordinate coordinate, ChessFigure figure)
+    {
+        
+    }
+
+    public void ClearPosition(Coordinate position)
+    {
+        
     }
 
     private Color ChangeColor(Color color)
