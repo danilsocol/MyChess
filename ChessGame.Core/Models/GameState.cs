@@ -7,7 +7,7 @@ public record GameState(
     ChessPlayer WhitePlayer,
     ChessPlayer BlackPlayer,
     ChessPlayer CurrentTurnPlayer,
-    List<HistoryMove> MoveHistory,
+    Stack<HistoryMove> MoveHistory,
     bool IsCheck,
     bool IsCheckmate,
     bool IsStalemate

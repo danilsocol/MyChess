@@ -35,61 +35,14 @@ public class GameEngine : IGameEngine
     private readonly ChessPlayer _whitePlayer;
     private readonly ChessPlayer _blackPlayer;
     
-    private readonly List<HistoryMove> _moveHistory = new();
+    private readonly Stack<HistoryMove> _moveHistory = new();
 
     private ChessPlayer _currentTurnPLayer;
     public ChessPlayer GetCurrentTurn() => _currentTurnPLayer;
     
-    public MoveStatus TryMakeMove(Move move)
-    {
-        if (!_board.IsInBound(move.From) || !_board.IsInBound(move.To))
-        {
-            return MoveStatus.OutOfBounds;
-        }
-
-        var selectFigure = _board.GetCellFigure(move.From);
-        if (selectFigure is null)
-        {
-            return MoveStatus.NoFigureSelected;
-        }
-
-        if (selectFigure.Color != _currentTurnPLayer.Color)
-        {
-            return MoveStatus.NotYourFigure;
-        }
-
-        var possibleMoves = selectFigure.GetPossibleMoves(move.From, _board);
-        if (possibleMoves.All(x => x.To != move.To))
-        {
-            if (move.From == move.To) return MoveStatus.SameCell;
-
-            return MoveStatus.InvalidMove;
-        }
-
-        var toCell = _board.GetCell(move.To);
-        ChessFigure? takenFigure = null;
-        
-        if (toCell.Figure is not null)
-        {
-            if (toCell.Figure.Color == _currentTurnPLayer.Color) return MoveStatus.CannotCaptureOwn;
-
-            takenFigure = toCell.Figure;
-        }
-        
-        selectFigure.HasMoved = true;
-        _moveHistory.Add(new HistoryMove(selectFigure, move.From, move.To, move.MoveType, takenFigure));
-        ChangeTurnPlayer();
-        return MoveStatus.Success;
-    }
-
     private void ChangeTurnPlayer()
     {
         _currentTurnPLayer = _currentTurnPLayer == _whitePlayer ? _blackPlayer : _whitePlayer;
-    }
-
-    public bool IsGameOver()
-    {
-        return false;
     }
     
     public GameState ExportState()
@@ -105,5 +58,82 @@ public class GameEngine : IGameEngine
             false,
             false
             );
+    }
+
+    public ChessBoard GetBoard() => _board;
+
+    public Stack<HistoryMove> GetHistory() => _moveHistory;
+
+    public IEnumerable<PossibleMove> GetPossibleMoves(ChessBoardCell cell)
+    {
+        if (cell.Figure is null) throw new ArgumentException("Выбрана ячейка без фигуры");
+        return cell.Figure.GetPossibleMoves(cell.Coordinate, _board);
+    }
+    
+    public MoveStatus MakeMove(Move move)
+    {
+        if (!_board.IsInBound(move.From) || !_board.IsInBound(move.To))
+            return MoveStatus.OutOfBounds;
+        
+        var selectFigure = _board.GetCellFigure(move.From);
+        if (selectFigure is null)
+            return MoveStatus.NoFigureSelected;
+        
+    
+        if (selectFigure.Color != _currentTurnPLayer.Color)
+            return MoveStatus.NotYourFigure;
+        
+    
+        var possibleMoves = selectFigure.GetPossibleMoves(move.From, _board);
+        if (possibleMoves.All(x => x.To != move.To))
+        {
+            if (move.From == move.To) return MoveStatus.SameCell;
+    
+            return MoveStatus.InvalidMove;
+        }
+    
+        var toCell = _board.GetCell(move.To);
+        ChessFigure? takenFigure = null;
+        
+        if (toCell.Figure is not null)
+        {
+            if (toCell.Figure.Color == _currentTurnPLayer.Color) return MoveStatus.CannotCaptureOwn;
+    
+            takenFigure = toCell.Figure;
+        }
+        
+        selectFigure.HasMoved = true;
+        _moveHistory.Push(new HistoryMove(selectFigure, move.From, move.To, move.MoveType, takenFigure));
+        
+        _board.SetFigureAt(move.To, selectFigure);
+        _board.ClearPosition(move.From);
+        
+        ChangeTurnPlayer();
+        return MoveStatus.Success;
+    }
+
+    public void CancelMove()
+    {
+        var cancelMove = _moveHistory.Pop();
+        
+        _board.SetFigureAt(cancelMove.To, cancelMove.TakenFigure);
+        _board.SetFigureAt(cancelMove.From, cancelMove.SelectFigure);
+        
+        ChangeTurnPlayer();
+    }
+
+    public void DownloadGame()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SaveGame()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void GameOver()
+    {
+        throw new NotImplementedException();
     }
 }
