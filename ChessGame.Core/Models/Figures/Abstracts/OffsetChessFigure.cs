@@ -1,4 +1,4 @@
-﻿namespace ChessGame.Core.Models.Figures.Abstracts;
+namespace ChessGame.Core.Models.Figures.Abstracts;
 
 public abstract class OffsetChessFigure : ChessFigure
 {
@@ -8,9 +8,9 @@ public abstract class OffsetChessFigure : ChessFigure
     {
     }
     
-    public override IEnumerable<Coordinate> GetPossibleMoves(Coordinate fromCoord, ChessBoard chessBoard)
+    public override IEnumerable<PossibleMove> GetPossibleMoves(Coordinate fromCoord, ChessBoard chessBoard)
     {
-        List<Coordinate> moves = new List<Coordinate>();
+        List<PossibleMove> moves = new List<PossibleMove>();
 
         foreach (var offset in Offset)
         {
@@ -23,12 +23,12 @@ public abstract class OffsetChessFigure : ChessFigure
             if(cell.Figure is not null && cell.Color != Color)
             {
                 if(cell.Color != Color)
-                    moves.Add(cell.Coordinate);
+                    moves.Add(new PossibleMove(cell.Coordinate));
                 
                 continue;
             }
             
-            moves.Add(cell.Coordinate);
+            moves.Add(new PossibleMove(cell.Coordinate));
         }
 
         return moves;

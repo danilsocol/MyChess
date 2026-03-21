@@ -2,4 +2,4 @@
 
 namespace ChessGame.Core.Models;
 
-public record Move(Coordinate From, Coordinate To);
+public record Move(Coordinate From, Coordinate To, MoveType MoveType);

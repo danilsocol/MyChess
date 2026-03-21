@@ -1,4 +1,4 @@
-﻿namespace ChessGame.Core.Models.Figures.Abstracts;
+namespace ChessGame.Core.Models.Figures.Abstracts;
 
 public abstract class DirectionalChessFigure : ChessFigure
 {
@@ -8,9 +8,9 @@ public abstract class DirectionalChessFigure : ChessFigure
     {
     }
     
-    public override IEnumerable<Coordinate> GetPossibleMoves(Coordinate fromCoord, ChessBoard chessBoard)
+    public override IEnumerable<PossibleMove> GetPossibleMoves(Coordinate fromCoord, ChessBoard chessBoard)
     {
-        List<Coordinate> moves = new List<Coordinate>();
+        List<PossibleMove> moves = new List<PossibleMove>();
 
         foreach (var direction in Direction)
         {
@@ -25,12 +25,12 @@ public abstract class DirectionalChessFigure : ChessFigure
                 if(cell.Figure is not null)
                 {
                     if(cell.Figure.Color != Color)
-                        moves.Add(cell.Coordinate);
+                        moves.Add( new PossibleMove(cell.Coordinate));
                     
                     break;
                 }
                 
-                moves.Add(cell.Coordinate);
+                moves.Add(new PossibleMove(cell.Coordinate));
             }
         }
 

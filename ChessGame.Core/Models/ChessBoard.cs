@@ -1,5 +1,4 @@
-﻿using ChessGame.Core.Models.Figures;
-using ChessGame.Core.Models.Figures.Abstracts;
+﻿using ChessGame.Core.Models.Figures.Abstracts;
 
 namespace ChessGame.Core.Models;
 
@@ -55,14 +54,14 @@ public class ChessBoard
         return true;
     }
 
-    public void SetFigureAt(Coordinate coordinate, ChessFigure figure)
+    public void SetFigureAt(Coordinate coordinate, ChessFigure? figure)
     {
-        
+        GameField[coordinate.Line, coordinate.Column].Figure = figure;
     }
 
     public void ClearPosition(Coordinate position)
     {
-        
+        GameField[position.Line, position.Column].Figure = null;        
     }
 
     private Color ChangeColor(Color color)

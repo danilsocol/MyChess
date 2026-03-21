@@ -11,7 +11,7 @@ public class ChessBoardCell
     public const int MinLine = 0;
     public Coordinate Coordinate { get; init; }
     public Color Color { get; init; }
-    public ChessFigure? Figure { get; private set; }
+    public ChessFigure? Figure { get; set; }
     
     public ChessBoardCell(Coordinate coordinate, Color color)
     {

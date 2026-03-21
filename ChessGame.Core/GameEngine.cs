@@ -1,4 +1,4 @@
-﻿using ChessGame.Core.Models;
+using ChessGame.Core.Models;
 using ChessGame.Core.Models.Figures;
 using ChessGame.Core.Models.Figures.Abstracts;
 
@@ -59,7 +59,7 @@ public class GameEngine : IGameEngine
         }
 
         var possibleMoves = selectFigure.GetPossibleMoves(move.From, _board);
-        if (!possibleMoves.Contains(move.To))
+        if (possibleMoves.All(x => x.To != move.To))
         {
             if (move.From == move.To) return MoveStatus.SameCell;
 
@@ -76,7 +76,8 @@ public class GameEngine : IGameEngine
             takenFigure = toCell.Figure;
         }
         
-        _moveHistory.Add(new HistoryMove(move.From,move.To, takenFigure));
+        selectFigure.HasMoved = true;
+        _moveHistory.Add(new HistoryMove(selectFigure, move.From, move.To, move.MoveType, takenFigure));
         ChangeTurnPlayer();
         return MoveStatus.Success;
     }
@@ -88,7 +89,7 @@ public class GameEngine : IGameEngine
 
     public bool IsGameOver()
     {
-        throw new NotImplementedException();
+        return false;
     }
     
     public GameState ExportState()
@@ -105,5 +106,4 @@ public class GameEngine : IGameEngine
             false
             );
     }
-
 }

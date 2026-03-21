@@ -1,9 +1,9 @@
-﻿namespace ChessGame.Core.Models;
+namespace ChessGame.Core.Models;
 
 public class Coordinate
 {
-    public int Column { get; private set; }
-    public int Line { get; private set; }
+    public int Column { get; init; }
+    public int Line { get; init; }
     
     public Coordinate(int line,int column)
     {

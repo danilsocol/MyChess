@@ -1,0 +1,12 @@
+D:\Development\Projects\MyChest\ChessGame.Core\bin\Debug\netcoreapp10.0\ChessGame.Core.deps.json
+D:\Development\Projects\MyChest\ChessGame.Core\bin\Debug\netcoreapp10.0\ChessGame.Core.dll
+D:\Development\Projects\MyChest\ChessGame.Core\bin\Debug\netcoreapp10.0\ChessGame.Core.pdb
+D:\Development\Projects\MyChest\ChessGame.Core\obj\Debug\netcoreapp10.0\ChessGame.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\Development\Projects\MyChest\ChessGame.Core\obj\Debug\netcoreapp10.0\ChessGame.Core.AssemblyInfoInputs.cache
+D:\Development\Projects\MyChest\ChessGame.Core\obj\Debug\netcoreapp10.0\ChessGame.Core.AssemblyInfo.cs
+D:\Development\Projects\MyChest\ChessGame.Core\obj\Debug\netcoreapp10.0\ChessGame.Core.csproj.CoreCompileInputs.cache
+D:\Development\Projects\MyChest\ChessGame.Core\obj\Debug\netcoreapp10.0\ChessGame.Core.sourcelink.json
+D:\Development\Projects\MyChest\ChessGame.Core\obj\Debug\netcoreapp10.0\ChessGame.Core.dll
+D:\Development\Projects\MyChest\ChessGame.Core\obj\Debug\netcoreapp10.0\refint\ChessGame.Core.dll
+D:\Development\Projects\MyChest\ChessGame.Core\obj\Debug\netcoreapp10.0\ChessGame.Core.pdb
+D:\Development\Projects\MyChest\ChessGame.Core\obj\Debug\netcoreapp10.0\ref\ChessGame.Core.dll

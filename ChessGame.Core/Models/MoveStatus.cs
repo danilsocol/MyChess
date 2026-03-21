@@ -2,11 +2,32 @@
 
 public enum MoveStatus
 {
-    Success,              // Ход успешен
-    OutOfBounds,          // Шаг вне пределов доски
-    NoFigureSelected,     // Фигура не выбрана
-    NotYourFigure,        // Вы выбрали не свою фигуру
-    SameCell,             // Ход на ту же ячейку
-    InvalidMove,          // Невозможно сходить на эту ячейку
-    CannotCaptureOwn      // Нельзя рубить свою фигуру
+    /// <summary>
+    /// Ход успешен
+    /// </summary>
+    Success,
+    /// <summary>
+    /// Шаг вне пределов доски
+    /// </summary>
+    OutOfBounds,
+    /// <summary>
+    /// Фигура не выбрана
+    /// </summary>
+    NoFigureSelected,
+    /// <summary>
+    /// Вы выбрали не свою фигуру
+    /// </summary>
+    NotYourFigure,
+    /// <summary>
+    /// Ход на ту же ячейку
+    /// </summary>
+    SameCell,
+    /// <summary>
+    /// Невозможно сходить на эту ячейку
+    /// </summary>
+    InvalidMove,          
+    /// <summary>
+    /// Нельзя рубить свою фигуру
+    /// </summary>
+    CannotCaptureOwn      
 }

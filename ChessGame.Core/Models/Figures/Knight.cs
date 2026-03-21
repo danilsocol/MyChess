@@ -1,4 +1,4 @@
-﻿using ChessGame.Core.Models.Figures.Abstracts;
+using ChessGame.Core.Models.Figures.Abstracts;
 
 namespace ChessGame.Core.Models.Figures;
 

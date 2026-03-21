@@ -1,15 +1,15 @@
-﻿using ChessGame.Core.Models;
+using ChessGame.Core.Models;
 using ChessGame.Core.Models.Figures;
 
 namespace ChessGame.Core;
 
-public class RulesValidator
+public static class RulesValidator
 {
 
     /// <summary>
     /// Проверяет, находится ли король указанного цвета под шахом.
     /// </summary>
-    public bool IsInCheck(Color color, ChessBoard board)
+    public static bool IsInCheck(Color color, ChessBoard board)
     {
         var posKing = FindKing(color, board);
         if(posKing == null) return false;
@@ -19,7 +19,23 @@ public class RulesValidator
             if(cell.Figure is null || cell.Figure.Color == color) continue;
 
             var possibleMoves = cell.Figure.GetPossibleMoves(cell.Coordinate, board);
-            if(possibleMoves.Contains(posKing)) return true;
+            if(possibleMoves.Any(x => x.To == posKing)) return true;
+        }
+        
+        return false;
+    }
+    
+    /// <summary>
+    /// Проверяет, находится ли клетка под шахом, другого игрока.
+    /// </summary>
+    public static bool IsInCheck(Coordinate pos, Color color, ChessBoard board)
+    {
+        foreach (var cell in board.GameField)
+        {
+            if(cell.Figure is null || cell.Figure.Color == color) continue;
+
+            var possibleMoves = cell.Figure.GetPossibleMoves(cell.Coordinate, board);
+            if(possibleMoves.Any(x => x.To == pos)) return true;
         }
         
         return false;
@@ -28,7 +44,7 @@ public class RulesValidator
     /// <summary>
     /// Проверяет, находится ли король указанного цвета под шахом и нет ли возможности сделать ход, чтобы его убрать.
     /// </summary>
-    public bool IsCheckmate(Color color, ChessBoard board)
+    public static bool IsCheckmate(Color color, ChessBoard board)
     {
         if (!IsInCheck(color, board)) return false;
 
@@ -39,14 +55,14 @@ public class RulesValidator
             var possibleMoves = cell.Figure.GetPossibleMoves(cell.Coordinate, board);
             foreach (var possibleMove in possibleMoves)
             {
-                if (WouldMoveRemoveCheck(cell.Coordinate, possibleMove, color, board)) return true;
+                if (WouldMoveRemoveCheck(cell.Coordinate, possibleMove.To, color, board)) return true;
             }
         }
         return false;
     }
     
     
-    private Coordinate? FindKing(Color color, ChessBoard board)
+    private static Coordinate? FindKing(Color color, ChessBoard board)
     {
         foreach (var cell in board.GameField)
         {
@@ -62,11 +78,11 @@ public class RulesValidator
     /// <summary>
     /// Проверяет, уберёт ли указанный ход шах с короля указанного цвета.
     /// </summary>
-    private bool WouldMoveRemoveCheck(Coordinate from, Coordinate to, Color color, ChessBoard board)
+    private static bool WouldMoveRemoveCheck(Coordinate from, Coordinate to, Color color, ChessBoard board)
     {
         var originalFigure = board.GetCell(from).Figure;
         var targetFigure = board.GetCell(to).Figure;
-
+        
         board.SetFigureAt(to, originalFigure);
         board.ClearPosition(from);
 
