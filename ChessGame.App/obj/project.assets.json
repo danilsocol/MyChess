@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net10.0": {}
+    "net10.0": {
+      "ChessGame.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "compile": {
+          "bin/placeholder/ChessGame.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ChessGame.Core.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "ChessGame.Core/1.0.0": {
+      "type": "project",
+      "path": "../ChessGame.Core/ChessGame.Core.csproj",
+      "msbuildProject": "../ChessGame.Core/ChessGame.Core.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net10.0": []
+    "net10.0": [
+      "ChessGame.Core >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Пользователь\\.nuget\\packages\\": {},
@@ -33,13 +52,16 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {},
-        "https://git.tk-chel.ru/api/v4/groups/17/-/packages/nuget/index.json": {}
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net10.0": {
           "targetAlias": "netcoreapp10.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\Development\\Projects\\MyChest\\ChessGame.Core\\ChessGame.Core.csproj": {
+              "projectPath": "D:\\Development\\Projects\\MyChest\\ChessGame.Core\\ChessGame.Core.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

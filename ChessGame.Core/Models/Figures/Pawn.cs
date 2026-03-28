@@ -4,8 +4,6 @@ namespace ChessGame.Core.Models.Figures;
 
 public class Pawn : ChessFigure
 {
-    public bool IsFirstMove { get; set; } = true;
-    
     public Pawn(Color color, Coordinate position) : base(color)
     {
     }
@@ -22,7 +20,7 @@ public class Pawn : ChessFigure
         {
             moves.Add(new PossibleMove(oneStepCell.Coordinate));
 
-            if (IsFirstMove && chessBoard.IsInBound(oneStepCell.Coordinate.Line + direction, oneStepCell.Coordinate.Column))
+            if (HasMoved && chessBoard.IsInBound(oneStepCell.Coordinate.Line + direction, oneStepCell.Coordinate.Column))
             {
                 var twoStepCell = chessBoard.GetCell(oneStepCell.Coordinate.Line + direction, oneStepCell.Coordinate.Column);
                 if(twoStepCell.IsEmpty()) moves.Add(new PossibleMove(twoStepCell.Coordinate));

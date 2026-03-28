@@ -27,10 +27,6 @@ public enum MoveStatus
     /// </summary>
     InvalidMove,          
     /// <summary>
-    /// Нельзя рубить свою фигуру
-    /// </summary>
-    CannotCaptureOwn,    
-    /// <summary>
     /// Игра закончена
     /// </summary>
     GameOver     

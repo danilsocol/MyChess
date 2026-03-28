@@ -31,6 +31,9 @@ public abstract class DirectionalChessFigure : ChessFigure
                 }
                 
                 moves.Add(new PossibleMove(cell.Coordinate));
+                
+                columnPos = fromCoord.Column + direction.directionColumn;
+                linePos = fromCoord.Line + direction.directionLine;
             }
         }
 

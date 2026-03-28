@@ -85,7 +85,7 @@ public class GameEngine : IGameEngine
         
     
         var possibleMoves = selectFigure.GetPossibleMoves(move.From, _board);
-        if (possibleMoves.All(x => x.To != move.To))
+        if (possibleMoves.All(x => !x.To.Equals(move.To)))
         {
             if (move.From == move.To) return MoveStatus.SameCell;
     
@@ -97,7 +97,7 @@ public class GameEngine : IGameEngine
         
         if (toCell.Figure is not null)
         {
-            if (toCell.Figure.Color == _currentTurnPLayer.Color) return MoveStatus.CannotCaptureOwn;
+            if (toCell.Figure.Color == _currentTurnPLayer.Color) return MoveStatus.InvalidMove;
     
             takenFigure = toCell.Figure;
         }

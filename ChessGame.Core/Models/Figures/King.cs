@@ -20,7 +20,7 @@ public class King : OffsetChessFigure
     {
         var moves = new List<PossibleMove>(base.GetPossibleMoves(fromCoord, chessBoard));
         
-        if(RulesValidator.IsInCheck(Color, chessBoard))
+        if(!RulesValidator.IsInCheck(Color, chessBoard))
         {
             AddPossibleSwapForDirection(moves, fromCoord, chessBoard, DirectionColumnForSwap[0]);
             AddPossibleSwapForDirection(moves, fromCoord, chessBoard, DirectionColumnForSwap[1]);
@@ -61,11 +61,4 @@ public class King : OffsetChessFigure
         
         return moves;
     }
-    
-    // Условия для рокировки:
-    // 1. Король и ладья не двигались (нужно хранить в `ChessBoard` или `GameState`)
-    // 2. Нет фигур между королём и ладьёй
-    // 3. Король не находится под шахом
-    // 4. Король не проходит через атакуемую клетку
-    // 5. Король не оказывается под шахом после рокировки
 }

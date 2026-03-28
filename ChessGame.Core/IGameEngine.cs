@@ -5,6 +5,11 @@ namespace ChessGame.Core;
 public interface IGameEngine
 {
     /// <summary>
+    /// Получить текущего игрока
+    /// </summary>
+    ChessPlayer GetCurrentTurn();
+    
+    /// <summary>
     /// Получить игровое поле с фигурами
     /// </summary>
     ChessBoard GetBoard();
@@ -43,4 +48,9 @@ public interface IGameEngine
     /// Конец игры
     /// </summary>
     void GameOver();
+    
+    /// <summary>
+    /// Экспортировать состояние игры
+    /// </summary>
+    GameState ExportState();
 }

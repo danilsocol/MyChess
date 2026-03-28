@@ -20,7 +20,7 @@ public abstract class OffsetChessFigure : ChessFigure
             if(!chessBoard.IsInBound(linePos,columnPos)) continue;
             var cell = chessBoard.GetCell(linePos,columnPos);
 
-            if(cell.Figure is not null && cell.Color != Color)
+            if(cell.Figure is not null && cell.Figure.Color != Color)
             {
                 if(cell.Color != Color)
                     moves.Add(new PossibleMove(cell.Coordinate));

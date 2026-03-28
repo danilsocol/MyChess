@@ -8,4 +8,8 @@
         <RootNamespace>MyChess</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+        <ProjectReference Include="..\ChessGame.Core\ChessGame.Core.csproj" />
+    </ItemGroup>
+
 </Project>

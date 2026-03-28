@@ -10,5 +10,4 @@ public class PossibleMove
 
     public Coordinate To { get; init; }
     public MoveType MoveType { get; init; }
-    
 }
