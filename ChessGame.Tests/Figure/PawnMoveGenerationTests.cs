@@ -56,7 +56,7 @@ public class PawnMoveGenerationTests
     {
         var board = new ChessBoard();
         var from = TestDataFactory.C(1, 3);
-        var pawn = new Pawn(Color.White, from) { IsFirstMove = false };
+        var pawn = new Pawn(Color.White, from) { HasMoved = false };
         TestDataFactory.PlaceFigure(board, 1, 3, pawn);
         var moves = pawn.GetPossibleMoves(from, board).ToList();
         Assert.Contains(moves, m => m.To.Line == 2 && m.To.Column == 3);
