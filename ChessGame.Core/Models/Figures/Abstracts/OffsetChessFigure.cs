@@ -22,7 +22,7 @@ public abstract class OffsetChessFigure : ChessFigure
 
             if(cell.Figure is not null && cell.Figure.Color != Color)
             {
-                if(cell.Color != Color)
+                if(cell.Figure.Color != Color)
                     moves.Add(new PossibleMove(cell.Coordinate));
                 
                 continue;

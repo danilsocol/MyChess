@@ -16,7 +16,7 @@ public static class RulesValidator
 
         foreach (var cell in board.GameField)
         {
-            if(cell.Figure is null || cell.Figure.Color == color) continue;
+            if(cell.Figure is null || cell.Figure.Color == color || cell.Figure is King) continue;
 
             var possibleMoves = cell.Figure.GetPossibleMoves(cell.Coordinate, board);
             if(possibleMoves.Any(x => x.To == posKing)) return true;
@@ -32,7 +32,7 @@ public static class RulesValidator
     {
         foreach (var cell in board.GameField)
         {
-            if(cell.Figure is null || cell.Figure.Color == color) continue;
+            if(cell.Figure is null || cell.Figure.Color == color || cell.Figure is King) continue;
 
             var possibleMoves = cell.Figure.GetPossibleMoves(cell.Coordinate, board);
             if(possibleMoves.Any(x => x.To == pos)) return true;
@@ -50,7 +50,7 @@ public static class RulesValidator
 
         foreach (var cell in board.GameField) 
         {
-            if(cell.Figure is null || cell.Figure.Color == color) continue;
+            if(cell.Figure is null || cell.Figure.Color == color || cell.Figure is King) continue;
             
             var possibleMoves = cell.Figure.GetPossibleMoves(cell.Coordinate, board);
             foreach (var possibleMove in possibleMoves)
